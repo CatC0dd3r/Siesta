@@ -67,7 +67,7 @@ def execute(cmd: str):
 		raise SystemExit
 	if cmd == "shutdown_system":
 		os.system("shutdown")
-	if cmd == "reboot":
+	if cmd == "restart_system":
 		say("Перезагружаю систему")
 		os.system("reboot")
 	if cmd not in cmd_list.keys():
