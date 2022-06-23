@@ -78,6 +78,9 @@ def listening():
 						execute(cmd['cmd'])
 
 
+def what_time():
+	now = datetime.datetime.now()
+	return "Сейчас " + num2text(now.hour) + ' и' + num2text(now.minute) 
 
 def restart():
 	say("Секунду")
