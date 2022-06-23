@@ -23,9 +23,7 @@ cmd_list = {
 	"telegram": ("открой телеграм", "телега"),
 	"discord": ("открой дискорд", "дискорд"),
 	"restart": ("перезагрузка", "рестарт"),
-	"shutdown": ("умри", "отключись"),
-	"shutdown_system": ("отключи систему", "убей систему нахуй"),
-	"restart_system": ("перезапуск", "перезагрузи систему")
+	"shutdown": ("умри", "отключись")
 }
 def filter(raw_voice: str): 
 	cmd = raw_voice.replace("сиеста", "")
@@ -42,36 +40,15 @@ def recog(cmd: str):
 	return rc
 
 def execute(cmd: str):
-	if cmd == "time":
-		now = datetime.datetime.now()
-		say("Сейчас " + numtotext(now.hour) + ' и' + numtotext(now.minute))
-	if cmd == "browser":
-		webbrowser.open("https://google.com")
-		say("Открыла")
-	if cmd == "hentai":
-		say("Ямате кудасай, няяя")
-	if cmd == "mkdir":
-		os.mkdir("Project")
-		say("Папка создана! НЯЯЯЯ")
-	if cmd == "telegram":
-		subprocess.Popen('telegram-desktop')
-		say("Открыла")
-	if cmd == "discord":
-		subprocess.Popen('discord')
-	if cmd == "restart":
-		say("Секунду")
-		python = sys.executable
-		os.execl(python, python, * sys.argv)
-	if cmd == "shutdown":
-		say("Пока!!))")
-		raise SystemExit
-	if cmd == "shutdown_system":
-		os.system("shutdown")
-	if cmd == "restart_system":
-		say("Перезагружаю систему")
-		os.system("reboot")
-	if cmd not in cmd_list.keys():
-		say(neironka(cmd))
+	match cmd:
+		case "time": say(what_time())
+		case "browser": webbrowser.open("https://google.com")
+		case "hentai": say("Ямате кудасай, няяя")
+		case "mkdir": os.mkdir("Project")
+		case "telegram": subprocess.Popen('telegram-desktop')
+		case "discord": subprocess.Popen('discord')
+		case "restart": restart()
+		case "shutdown": raise SystemExit
 
 def say(example_text):
 	audio_paths = model_torch.save_wav(text=example_text,
@@ -94,8 +71,15 @@ def listening():
 				voice = rec.Result()
 				if "сиеста" in voice:
 					cmd = recog(filter(voice))
-					execute(cmd['cmd'])
+					if cmd['cmd'] not in cmd_list.keys():
+						sentence = neironka(filter(voice))
+						say(sentence)
+					else: 
+						execute(cmd['cmd'])
 
+
+
+				
 if __name__ == "__main__":
 	device_torch = torch.device('cpu')
 	torch.set_num_threads(4)
