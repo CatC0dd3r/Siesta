@@ -79,7 +79,11 @@ def listening():
 
 
 
-				
+def restart():
+	say("Секунду")
+	python = sys.executable
+	os.execl(python, python, * sys.argv)
+	
 if __name__ == "__main__":
 	device_torch = torch.device('cpu')
 	torch.set_num_threads(4)
