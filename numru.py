@@ -104,7 +104,7 @@ def numtotext(num, main_units=((u'', u'', u''), 'm')):
     return ' '.join(name).strip()
 
 
-def decimal2text(value, places=2,
+def decimaltotext(value, places=2,
                  int_units=(('', '', ''), 'm'),
                  exp_units=(('', '', ''), 'm')):
     value = decimal.Decimal(value)
@@ -121,12 +121,12 @@ if __name__ == '__main__':
         try:
             num = sys.argv[1]
             if '.' in num:
-                print(decimal2text(
+                print(decimaltotext(
                     decimal.Decimal(num),
                     int_units=((u'штука', u'штуки', u'штук'), 'f'),
                     exp_units=((u'кусок', u'куска', u'кусков'), 'm')))
             else:
-                print(num2text(
+                print(numtotext(
                     int(num),
                     main_units=((u'штука', u'штуки', u'штук'), 'f')))
         except ValueError:
