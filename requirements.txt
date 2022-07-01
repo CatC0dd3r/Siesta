@@ -1,9 +1,0 @@
-playsound
-nltk
-numpy
-vosk
-torch
-sounddevice
-queue
-decimal
-fuzzywuzzy
