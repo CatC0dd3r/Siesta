@@ -28,7 +28,7 @@ class Core:
 		self.speaker='baya'
 		self.model_stt = vosk.Model("model-small")
 		self.samplerate = 16000 
-		self.device_stt = 2
+		self.device_stt = 1
 		self.q = queue.Queue()
 		self.vectorizer = TfidfVectorizer(analyzer="char", ngram_range=(2, 3))
 		self.classifier_probability = LogisticRegression()
