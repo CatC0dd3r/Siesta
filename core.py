@@ -26,7 +26,7 @@ class Core:
 
 		self.sample_rate = 48000
 		self.speaker='baya'
-		self.model_stt = vosk.Model("models/model-small")
+		self.model_stt = vosk.Model("model-small")
 		self.samplerate = 16000 
 		self.device_stt = 2
 		self.q = queue.Queue()
