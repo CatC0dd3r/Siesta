@@ -15,7 +15,6 @@ from skills import *
 class Core:
 	def __init__(self):
 		self.device_torch = torch.device('cpu')
-		torch.set_num_threads(4)
 		self.local_file = 'model.pt'
 		if not os.path.isfile(self.local_file):
 			torch.hub.download_url_to_file('https://models.silero.ai/models/tts/ru/ru_v3.pt', self.local_file)  
